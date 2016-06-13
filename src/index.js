@@ -3,7 +3,7 @@ import alertReducer from './reducer';
 import * as constants from './constants';
 import createAlert from './alertContainer';
 
-export default {
+export  {
   actions,
   alertReducer,
   constants,
