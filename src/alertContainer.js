@@ -12,7 +12,7 @@ const createAlert = config => WrappedComponent => {
     }
 
     componentWillUnmount() {
-      this.props.actions.destoryAlert(alertName);
+      this.props.actions.destroyAlert(alertName);
     }
 
     close() {

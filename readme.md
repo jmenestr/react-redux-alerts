@@ -1,7 +1,7 @@
 #react-redux-alerts
 ---
 ## Installation
-```npm i react-redux-form --save```
+```npm i react-redux-alerts --save```
 
 ## The Gist
 A redux based alert system designed for creating resuable alerts across your application. 
