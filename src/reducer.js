@@ -16,7 +16,6 @@ const reducer = (state, action) => {
   return behavior ? behavior(state, action) : state;
 }
 
-
 const alertReducer = (state = {}, action = {}) => {
   const {type, alertName } = action;
   if (state === undefined) return state;
