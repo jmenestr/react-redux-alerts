@@ -18,7 +18,7 @@ export default createAlert = config => WrappedComponent => {
       if(!this.props.isVisible) return false;
       return (
         <WrappedComponent />
-        )
+        );
     }
   }
 

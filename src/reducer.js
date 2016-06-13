@@ -40,10 +40,6 @@ const alertReducer = (state = {}, action = {}) => {
       return prev;
     }, {});
   }
-
-
-
-
   return Object.assign({}, state, {
     [alertName]: reducer(state[alertName], action) 
   });

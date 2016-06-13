@@ -1,11 +1,11 @@
 import actions from './src/actions';
-import reducer from './src/reducer';
+import alertReducer from './src/reducer';
 import constants from './src/constants';
 import createAlert from '.src/alertContainer';
 
 export {
   actions,
-  reducer,
+  alertReducer,
   constants,
   createAlert
 };
