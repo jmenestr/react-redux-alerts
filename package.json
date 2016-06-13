@@ -1,0 +1,23 @@
+{
+  "name": "redux-alerts",
+  "version": "1.0.0",
+  "description": "A lightweight library for creating keyed alerts in a Redux app",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register --recursive './test/'",
+    "test-watch": "./node_modules/mocha/bin/mocha test --watch --recursive"
+  },
+  "author": "Justin Menestrina",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
