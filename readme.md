@@ -1,5 +1,6 @@
 #react-redux-alerts
----
+
+
 ## Installation
 ```npm i react-redux-alerts --save```
 
@@ -12,19 +13,18 @@ A redux based alert system designed for creating resuable alerts across your app
 import React from 'react';
 import { createAlert } from 'react-redux-alerts';
 
+const MyAlert = () => (
+    <div>
+        This is my custom alert message.
+    </div>
+);
+
 /** 
- * This is a wrapper method that connects your alert to the store based on a alertName key. This will be the unique identifier that will allow you to both show the alert and dismiss the alert. 
+ * This is a wrapper method that connects your alert to the store based on a alertName key. This is the unique identifier that will allow you to both show the alert and dismiss the alert. 
  */
-
-const MyAlert = () -> (
-        <div>
-            This is my custom alert message.
-        </div>
-    );
-
 export default createAlert({
     alertName: 'myAlert'
-    })(MyAlert);
+})(MyAlert);
 ```
 
 This wrapped component can then be pluged into any container that you want the alert to show up in.
@@ -41,17 +41,17 @@ import MyAlert from './Alert';
 class MyContainer extends Component {
     render() {
         return(
-                <div>
-                    This is my custom container.
-                    <Alert />
-                    <button onClick={() => this.props.createAlert('myAlert')}
-                        Create Alert!
-                    </button>
-                    <button onClick={() => this.props.dismissAlert('myAlert')}
-                        Dismiss Alert!
-                    </button>
-                </div>
-            )
+            <div>
+                This is my custom container.
+                <MyAlert />
+                <button onClick={() => this.props.createAlert('myAlert')}
+                    Create Alert!
+                </button>
+                <button onClick={() => this.props.dismissAlert('myAlert')}
+                    Dismiss Alert!
+                </button>
+            </div>
+        )
     }
 }
 
