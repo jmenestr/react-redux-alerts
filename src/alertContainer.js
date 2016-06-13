@@ -14,10 +14,14 @@ const createAlert = config => WrappedComponent => {
     componentWillUnmount() {
       this.props.actions.destoryAlert(alertName);
     }
+
+    close() {
+      this.props.actions.dismissAlert(alertName);
+    }
     render() {
       if(!this.props.isVisible) return false;
       return (
-        <WrappedComponent />
+        <WrappedComponent close={() => this.close()} />
         );
     }
   }
