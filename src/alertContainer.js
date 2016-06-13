@@ -22,9 +22,15 @@ const createAlert = config => WrappedComponent => {
     }
   }
 
-  const mapStateToProps = state => { isVisible: state.alerts[alertName] };
-  const mapDispatchToProps = dispatch => { actions: bindActionCreators(alertActions, dispatch) };
+  function mapStateToProps (state) {
+    return { isVisible: state.alerts ? state.alerts[alertName] : false };
+  };
+
+  function mapDispatchToProps (dispatch) {
+    return { actions: bindActionCreators(alertActions, dispatch) };
+  };
   return connect(mapStateToProps, mapDispatchToProps)(AlertContainer);
+  
 };
 
 export default createAlert;

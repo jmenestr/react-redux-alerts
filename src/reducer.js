@@ -19,6 +19,7 @@ const reducer = (state, action) => {
 
 const alertReducer = (state = {}, action = {}) => {
   const {type, alertName } = action;
+  if (state === undefined) return state;
   if (type === alertTypes.INITIALIZE_ALERT) {
       return {
         ...state,
@@ -32,6 +33,7 @@ const alertReducer = (state = {}, action = {}) => {
       return prev;
     }, {});
   }
+
   if (state[alertName] === undefined) return state;
   if (type === alertTypes.DESTROY_ALERT) {
     return Object.keys(state).reduce((acc, alert) => {
