@@ -3,7 +3,7 @@ import alertReducer from './src/reducer';
 import constants from './src/constants';
 import createAlert from '.src/alertContainer';
 
-export {
+export default {
   actions,
   alertReducer,
   constants,
