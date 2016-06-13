@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as alertActions from './actions'; 
 
-export default createAlert = config => WrappedComponent => {
+const createAlert = config => WrappedComponent => {
   const { alertName } = config;
 
   class AlertContainer extends Component {
@@ -25,5 +25,6 @@ export default createAlert = config => WrappedComponent => {
   const mapStateToProps = state => { isVisible: state.alerts[alertName] };
   const mapDispatchToProps = dispatch => { actions: bindActionCreators(alertActions, dispatch) };
   return connect(mapStateToProps, mapDispatchToProps)(AlertContainer);
+};
 
-  }
+export default createAlert;
