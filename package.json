@@ -1,6 +1,6 @@
 {
   "name": "react-redux-alerts",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "A lightweight library for creating keyed alerts in a Redux app",
   "main": "./lib/index.js",
   "scripts": {
