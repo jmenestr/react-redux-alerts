@@ -42,4 +42,5 @@ const alertReducer = (state = {}, action = {}) => {
     [alertName]: reducer(state[alertName], action) 
   });
 };
+
 export default alertReducer;

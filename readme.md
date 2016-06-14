@@ -1,11 +1,30 @@
 #react-redux-alerts
 
+>React Redux Alerts is redux based alert system designed for creating resuable alerts across your application. It consists of two things: a redux reducer and a React higher order component to keep track of when your alert is to render.
 
 ## Installation
-```npm i react-redux-alerts --save```
+Simply run ```npm i react-redux-alerts --save``` to add to your project.
 
-## The Gist
-A redux based alert system designed for creating resuable alerts across your application. 
+
+## Getting started with `react-redux-alerts`
+###Step 1
+The first thing to do is mount the 'react-redux-alerts' reducer to Redux. This only has to be done at startup. 
+
+```js
+import { createStore, combineReducers } from 'redux';
+import { reducer as alertsReducer } from 'react-redux-alerts';
+
+const reducers = {
+    alerts: alertsReducer
+};
+
+const reducer = conbineReducer(reducers);
+const store = createStore(reducer);
+
+```
+
+###Step 2
+Decoreate your alert component with `createAlert()`. This will provide your component with two props: `message` and `close()`. The first prop is passed in when the `createAction` is called and the second is a function that can be called from within your component to dimiss it. 
 
 ```js
 // Alert.js
@@ -13,21 +32,23 @@ A redux based alert system designed for creating resuable alerts across your app
 import React from 'react';
 import { createAlert } from 'react-redux-alerts';
 
-const MyAlert = () => (
-    <div>
-        This is my custom alert message.
+const MyAlert = ({message, close}) => (
+    <div className='myAlert'>
+        {message}
+        <button onClick={close}> Click to Dismiss me </button>
     </div>
 );
 
 /** 
- * This is a wrapper method that connects your alert to the store based on a alertName key. This is the unique identifier that will allow you to both show the alert and dismiss the alert. 
+ * This is a wrapper method that connects your alert to the store based on a *alertName key. This is the unique identifier that will allow you to both show the alert and dismiss the alert. 
  */
 export default createAlert({
     alertName: 'myAlert'
 })(MyAlert);
 ```
 
-This wrapped component can then be pluged into any container that you want the alert to show up in.
+This wrapped component can then be pluged into any container that you want the alert to show up in. To show the notification, simply dispatch the `createAlert` action with two arguments: the `alertName` and the `alertMessage`.
+To close, simply call the `dismissAlert` action with the correct key. 
 
 ```js
 // MyContainer.js
@@ -44,7 +65,7 @@ class MyContainer extends Component {
             <div>
                 This is my custom container.
                 <MyAlert />
-                <button onClick={() => this.props.createAlert('myAlert')}
+                <button onClick={() => this.props.createAlert('myAlert', 'My Alert Message')}
                     Create Alert!
                 </button>
                 <button onClick={() => this.props.dismissAlert('myAlert')}
@@ -61,4 +82,4 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyContainer);
 ```
-Using the react-redux-alert actions, you can dismiss or create notifications by passing the appropriate key to the action.
+
