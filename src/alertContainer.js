@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as alertActions from './actions'; 
 
+const defaultState = {
+  isVisible: false,
+  message: ''
+};
+
 const createAlert = config => WrappedComponent => {
   const { alertName } = config;
 
@@ -21,15 +26,20 @@ const createAlert = config => WrappedComponent => {
     render() {
       if(!this.props.isVisible) return false;
       return (
-        <WrappedComponent {...this.props} close={() => this.close()} />
+        <WrappedComponent message={this.props.message} close={() => this.close()} />
         );
     }
   }
 
-  function mapStateToProps (state) {
-    return { isVisible: state.alerts ? state.alerts[alertName] : false };
+ function mapStateToProps(state) {
+    const alerts = state.alerts;
+    if (!alerts[alertName]) return defaultState;
+    return {
+      isVisible: alerts[alertName].isVisible,
+      message: alerts[alertName].message
+    };
   };
-
+    
   function mapDispatchToProps (dispatch) {
     return { actions: bindActionCreators(alertActions, dispatch) };
   };

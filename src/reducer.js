@@ -5,14 +5,10 @@ const initialState = {isVisible: false, message: '' };
 const behaviors = {
   [alertTypes.CREATE_ALERT](state, action) {
     const { alertMessage } = action;
-    return Object.assign({},
-      state,
-      { isVisible: true, message: alertMessage });
+    return { isVisible: true, message: alertMessage };
   },
   [alertTypes.DISMISS_ALERT](state, action) {
-    return Object.assign({},
-      state,
-      { isVisible: false });
+    return initialState;
   }
 };
 
