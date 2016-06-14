@@ -21,7 +21,7 @@ const createAlert = config => WrappedComponent => {
     render() {
       if(!this.props.isVisible) return false;
       return (
-        <WrappedComponent close={() => this.close()} />
+        <WrappedComponent {...this.props} close={() => this.close()} />
         );
     }
   }

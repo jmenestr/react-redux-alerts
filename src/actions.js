@@ -4,8 +4,8 @@ export const initializeAlert = alertName => {
   return { type: alertConstants.INITIALIZE_ALERT, alertName }
 };
 
-export const createAlert = alertName => {
-  return { type: alertConstants.CREATE_ALERT, alertName }
+export const createAlert = (alertName, alertMessage) => {
+  return { type: alertConstants.CREATE_ALERT, alertName, alertMessage }
 };
 
 export const dismissAlert = alertName => {

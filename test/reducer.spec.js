@@ -11,12 +11,12 @@ import { should, assert, expect } from 'chai';
 
 const testAlert = 'testAlert';
 const anotherTestAlert = 'anotherTestAlert';
-const initialState = false;
+const initialState = {isVisible: false, message: ''};
 
 const defaultState = {
-  [testAlert]: true,
-  [anotherTestAlert]: false,
-  yetAnotherTestAlert: true
+  [testAlert]: { isVisible: true, message: testAlert},
+  [anotherTestAlert]: { isVisible: true, message: anotherTestAlert },
+  yetAnotherTestAlert: { isVisible: false, message: anotherTestAlert }
 };
 
 const randomKey = 'randomKey';
@@ -34,7 +34,7 @@ describe('reducer', () => {
   });
 
   it('should delete an alert that is destroyed', () => {
-    const alerts = { [testAlert]: false };
+    const alerts = { [testAlert]: { isVisible: true, message: testAlert} };
     const destoryAlertAction = destroyAlert(testAlert);
 
     const newState = reducer(alerts, destoryAlertAction);
@@ -44,22 +44,22 @@ describe('reducer', () => {
 
   it('should should set an alert to true with the specified name', () => {
     const alerts =  { 
-      [testAlert]: false,
-      [anotherTestAlert]: false 
+      [testAlert]: { isVisible: false, message: ''},
+      [anotherTestAlert]: { isVisible: false, message: ''} 
     }; 
 
-    const createAlertAction = createAlert(testAlert);
+    const createAlertAction = createAlert(testAlert, testAlert);
     const newState = reducer(alerts, createAlertAction);
 
     assert.deepEqual(newState, {
-      [testAlert]: true,
-      [anotherTestAlert]: false
+      [testAlert]: { isVisible: true, message: testAlert},
+      [anotherTestAlert]: { isVisible: false, message: ''}
     });
   });
   it('should dismiss one alerts with the specified name', () => {
     const alerts =  { 
-      [testAlert]: true,
-      [anotherTestAlert]: true 
+      [testAlert]: { isVisible: true, message: testAlert},
+      [anotherTestAlert]: { isVisible: true, message: anotherTestAlert }
     };
 
     const dismissAlertAction = dismissAlert(testAlert);
@@ -67,23 +67,23 @@ describe('reducer', () => {
     const newState = reducer(alerts, dismissAlertAction);
 
     assert.deepEqual(newState, {
-      [testAlert]: false,
-      [anotherTestAlert]: true
+      [testAlert]: { isVisible: false, message: testAlert},
+      [anotherTestAlert]: { isVisible: true, message: anotherTestAlert }
     });
   });
 
   it('should dismiss all alerts', () => {
     const alerts =  { 
-      [testAlert]: true,
-      [anotherTestAlert]: true 
+      [testAlert]: { isVisible: true, message: testAlert},
+      [anotherTestAlert]: { isVisible: true, message: anotherTestAlert }
     };
 
     const dismissAllAlertsAction = dismissAllAlerts();
     const newState = reducer(alerts, dismissAllAlertsAction);
 
-    assert.deepEqual(newState, {
-      [testAlert]: false,
-      [anotherTestAlert]: false
+    assert.deepEqual(newState, { 
+      [testAlert]: { isVisible: false, message: ''},
+      [anotherTestAlert]: { isVisible: false, message: '' }
     });
   });
 

@@ -10,6 +10,7 @@ import {
 import { should, assert, expect } from 'chai';
 
 const testAlertName = 'testName';
+const testMessage = 'This is a test message';
 
 describe('actions', () => {
   it('should create initializeAlert action', () => {
@@ -24,11 +25,12 @@ describe('actions', () => {
 
   it('should create createAlert Aciton', () => {
     const createAlertAction = 
-      createAlert(testAlertName);
+      createAlert(testAlertName, testMessage);
 
     assert.deepEqual(createAlertAction, {
       type: types.CREATE_ALERT,
-      alertName: testAlertName
+      alertName: testAlertName,
+      alertMessage: testMessage
     });
   });
 

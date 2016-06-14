@@ -1,15 +1,20 @@
 import * as alertTypes from './constants';
 
+const initialState = {isVisible: false, message: '' };
+
 const behaviors = {
   [alertTypes.CREATE_ALERT](state, action) {
-    return true;
+    const { alertMessage } = action;
+    return Object.assign({},
+      state,
+      { isVisible: true, message: alertMessage });
   },
   [alertTypes.DISMISS_ALERT](state, action) {
-    return false;
+    return Object.assign({},
+      state,
+      { isVisible: false });
   }
 };
-
-const initialAlertState = false;
 
 const reducer = (state, action) => {
   const behavior = behaviors[action.type];
@@ -22,24 +27,20 @@ const alertReducer = (state = {}, action = {}) => {
   if (type === alertTypes.INITIALIZE_ALERT) {
       return {
         ...state,
-        [alertName]: false
+        [alertName]: initialState
       };
   }
   if (type === alertTypes.DISMISS_ALL_ALERTS) {
-    return Object.keys(state).reduce((acc, alert) => {
-      const prev = 
-        Object.assign({}, acc, { [alert]: initialAlertState });
-      return prev;
-    }, {});
+    return Object.keys(state).reduce((acc, alert) => 
+      Object.assign({}, acc, { [alert]: initialState }), 
+    {});
   }
 
   if (state[alertName] === undefined) return state;
   if (type === alertTypes.DESTROY_ALERT) {
-    return Object.keys(state).reduce((acc, alert) => {
-      const prev = alert === alertName ? 
-        acc : { ...acc, [alert]: state[alert] };
-      return prev;
-    }, {});
+    return Object.keys(state).reduce((acc, alert) => 
+      alert === alertName ? acc : { ...acc, [alert]: state[alert] },
+    {});
   }
   return Object.assign({}, state, {
     [alertName]: reducer(state[alertName], action) 
