@@ -8,7 +8,7 @@ Simply run ```npm i react-redux-alerts --save``` to add to your project.
 
 ## Getting started with `react-redux-alerts`
 ###Step 1
-The first thing to do is mount the 'react-redux-alerts' reducer to Redux. This only has to be done at startup. 
+The first thing to do is mount the 'react-redux-alerts' reducer to Redux. This only has to be done at startup. Make sure it's mounted to the alerts key. 
 
 ```js
 import { createStore, combineReducers } from 'redux';
